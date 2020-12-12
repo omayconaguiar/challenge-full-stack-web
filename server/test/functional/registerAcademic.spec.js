@@ -61,8 +61,12 @@ test('it should update register with success', async ({ assert, client }) => {
     cpf: '16371619986',
   }
 
+  const id = await Database
+    .select('id')
+    .from('users')
+
   const response = await client
-    .put('/api/users/1')
+    .put('/api/users/'+ id[0].id)
     .send(payload)
     .end()
 
@@ -84,9 +88,12 @@ test('it should delete register by id with success', async ({ assert, client }) 
     .send(sessionPayload)
     .end()
 
+  const id = await Database
+    .select('id')
+    .from('users')
 
   const response = await client
-    .delete('/api/users/1')
+    .delete('/api/users/'+ id[0].id)
     .end()
 
   response.assertStatus(200)
