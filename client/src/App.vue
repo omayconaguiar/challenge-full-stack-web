@@ -23,7 +23,7 @@
             <v-icon>mdi-{{ icons[2] }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>contact</v-list-item-title>
+            <v-list-item-title>Contato</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>

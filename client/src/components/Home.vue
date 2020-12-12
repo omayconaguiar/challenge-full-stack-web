@@ -13,12 +13,6 @@
         <h1 class="display-2 font-weight-bold mb-3">App Educacional</h1>
       </v-col>
     </v-row>
-    <v-row class="text-center">
-      <v-col class="mb-4">
-        <h1 class="display-5 font-weight-bold mb-3">Vue.Js + Vuetify</h1>
-        <h1 class="display-5 font-weight-bold mb-3">API Rest com Nodejs</h1>
-      </v-col>
-    </v-row>
   </v-container>
 </template>
 

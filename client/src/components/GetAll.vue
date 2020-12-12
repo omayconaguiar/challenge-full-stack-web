@@ -4,7 +4,7 @@
       <input
         type="text"
         class="form-control"
-        placeholder="Search by Name"
+        placeholder="Procurar por nome"
         v-model="title"
         @input="searchTitle($event)"
       />
@@ -133,8 +133,8 @@ export default {
         .delete("http://localhost:3000/api/users/" + id)
         .then(() => {
           this.getAll();
-          // this.dialog = false;
-          // this.snackbar = true;
+          this.dialog = false;
+          this.snackbar = true;
         })
         .catch(function (error) {
           alert(error);
