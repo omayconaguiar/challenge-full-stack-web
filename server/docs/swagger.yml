@@ -1,0 +1,159 @@
+openapi: 3.0.2
+info:
+  version: 0.1.0
+  title:  API para registro acadêmico
+  description: API para registro acadêmico
+  contact:
+    name: API Support
+    email: maayconaguiar11@hotmail.com
+
+servers:
+  - description: Desenvolvimento
+    url: http://127.0.0.1:3000
+
+tags:
+  - name: Register
+    description: Register
+
+paths:
+  /api/users:
+    post:
+      tags:
+        - Register
+      summary: Criar registro acadêmico
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - academic_id
+                - name
+                - cpf
+              properties:
+                academic_id:
+                  type: string
+                  description: academic_id
+                  example: "123456"
+                name:
+                  type: string
+                  description: name
+                  example: Maycon
+                cpf:
+                  type: string
+                  description: cpf
+                  example: "16317619887"
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                required:
+                  - key
+                properties:
+                  academic_id:
+                    type: string
+                    description: academic_id
+                    example: "123456"
+                  name:
+                    type: string
+                    description: name
+                    example: Maycon
+                  cpf:
+                    type: string
+                    description: cpf
+                    example: "16317619887"
+        500:
+          $ref: '#/components/responses/InternalServerError'
+    get:
+      tags:
+        - Register
+      summary: Retorna todos os registros
+      description: Pega todos os registros
+      parameters:
+      - name: "name"
+        in: query
+        required: false
+        schema:
+          type: string
+          example: "Maycon"
+          description: "name param"
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                properties:
+                  academic_id:
+                    type: string
+                    description: academic_id
+                    example: "123456"
+                  name:
+                    type: string
+                    description: name
+                    example: Maycon
+                  cpf:
+                    type: string
+                    description: cpf
+                    example: "16317619887"
+        500:
+          $ref: '#/components/responses/InternalServerError'
+  /api/users/{id}:
+    put:
+      tags:
+        - Register
+      description: Atualiza registro
+      summary: Atualiza registro
+      parameters:
+      - name: "id"
+        in: path
+        required: true
+        schema:
+          type: string
+          example: "1"
+          description: "Path params"
+      responses:
+        200:
+          description: Sucesso
+        500:
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - Register
+      description: Deleta registro acadêmico
+      summary: Deleta registro acadêmico
+      parameters:
+      - name: "id"
+        in: path
+        required: true
+        schema:
+          type: string
+          example: "1"
+          description: "Path params"
+      responses:
+        200:
+            description: Sucesso
+        500:
+          $ref: '#/components/responses/InternalServerError'
+components:
+  responses:
+    InternalServerError:
+      description: Erro interno do servidor
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                description: Código do erro
+                type: string
+                example: 'INTERNAL_SERVER_ERROR'
+              message:
+                description: Mensagem de erro
+                type: string
+                example: 'Failed to make request'
+              details:
+                description: Detalhes do erro
+                type: array
+                example:
+                  - message: 'Unexpected error to request'
