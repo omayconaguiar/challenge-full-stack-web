@@ -12,14 +12,31 @@
             v-model="user.name"
             label="Name"
             outlined
-            required
+            :class="{ 'is-invalid': submitted && $v.user.name.$error }"
           ></v-text-field>
+          <div v-if="submitted && $v.user.name.$error" class="invalid-feedback">
+            <span v-if="!$v.user.name.required">Nome é obrigatório</span>
+            <span v-if="!$v.user.name.minLength"
+              >Nome deve ter no mínimo 4 caracteres</span
+            >
+            <span v-if="!$v.user.name.maxLength"
+              >Nome deve ter no máximo 20 caracteres</span
+            >
+          </div>
           <v-text-field
             v-model="user.email"
             label="Email"
             outlined
-            required
-          ></v-text-field>
+            :class="{ 'is-invalid': submitted && $v.user.email.$error }"
+          >
+          </v-text-field>
+          <div
+            v-if="submitted && $v.user.email.$error"
+            class="invalid-feedback"
+          >
+            <span v-if="!$v.user.email.required">Email é obrigatório</span>
+            <span v-if="!$v.user.email.email">Email está inválido</span>
+          </div>
           <v-card-actions>
             <v-btn color="warning" class="mr-4" type="submit">Salvar</v-btn>
           </v-card-actions>
@@ -31,6 +48,13 @@
 
 <script>
 import axios from "axios";
+import {
+  required,
+  minLength,
+  email,
+  maxLength,
+} from "vuelidate/lib/validators";
+
 export default {
   name: "registreUpdate",
   mounted() {
@@ -52,10 +76,27 @@ export default {
         name: "",
         email: "",
       },
+      submitted: false,
     };
+  },
+  validations: {
+    user: {
+      email: { required, email },
+      name: {
+        required,
+        minLength: minLength(4),
+        maxLength: maxLength(40),
+      },
+    },
   },
   methods: {
     saveRegister() {
+      this.submitted = true;
+
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+        return;
+      }
       var router = this.$router;
       axios
         .put("http://localhost:3000/api/users/" + this.id, {

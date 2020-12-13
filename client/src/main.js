@@ -3,6 +3,7 @@ import App from './App.vue'
 import vuetify from './plugins/vuetify';
 
 import VueRouter from 'vue-router';
+import Vuelidate from 'vuelidate';
 
 import home from './components/Home';
 import getAll from './components/GetAll';
@@ -17,6 +18,7 @@ Vue.component('registreUpdate', registreUpdate);
 Vue.component('contact', contact);
 
 Vue.use(VueRouter);
+Vue.use(Vuelidate);
 
 const routes = [
   {path:'/', component:home},
