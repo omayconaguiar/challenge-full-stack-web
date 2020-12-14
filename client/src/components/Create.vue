@@ -14,19 +14,12 @@
             outlined
             label="Registro Acadêmico"
             :class="{
-              'is-invalid':
-                academicError ||
-                length ||
-                (submitted && $v.user.academic_id.$error),
+              'is-invalid': length || (submitted && $v.user.academic_id.$error),
             }"
           >
           </v-text-field>
           <div
-            v-if="
-              academicError ||
-              length ||
-              (submitted && $v.user.academic_id.$error)
-            "
+            v-if="length || (submitted && $v.user.academic_id.$error)"
             class="invalid-feedback"
           >
             <span v-if="!$v.user.academic_id.required"
@@ -35,24 +28,22 @@
             <span v-if="length"
               >Registro acadêmico deve ter exatamente 6 caracteres</span
             >
-            <span v-if="academicError">Registro acadêmico já existente</span>
           </div>
           <v-text-field
             v-model="user.email"
             label="Email"
             outlined
             :class="{
-              'is-invalid': emailError || (submitted && $v.user.email.$error),
+              'is-invalid': submitted && $v.user.email.$error,
             }"
           >
           </v-text-field>
           <div
-            v-if="emailError || (submitted && $v.user.email.$error)"
+            v-if="submitted && $v.user.email.$error"
             class="invalid-feedback"
           >
             <span v-if="!$v.user.email.required">Email é obrigatório</span>
             <span v-if="!$v.user.email.email">Email está inválido</span>
-            <span v-if="emaiError">Email já existente</span>
           </div>
           <v-text-field
             v-model="user.name"
@@ -76,17 +67,15 @@
             label="Cpf"
             outlined
             :class="{
-              'is-invalid':
-                cpfError || show || (submitted && $v.user.cpf.$error),
+              'is-invalid': show || (submitted && $v.user.cpf.$error),
             }"
           ></v-text-field>
           <div
-            v-if="cpfError || show || (submitted && $v.user.cpf.$error)"
+            v-if="show || (submitted && $v.user.cpf.$error)"
             class="invalid-feedback"
           >
             <span v-if="!$v.user.cpf.required">Cpf é obrigatório</span>
             <span v-if="show">Cpf está invalido</span>
-            <span v-if="cpfError">Cpf já existente</span>
           </div>
           <v-card-actions>
             <v-btn color="warning" class="mr-4" type="submit">Salvar</v-btn>
@@ -120,9 +109,6 @@ export default {
       submitted: false,
       show: false,
       length: false,
-      emailError: false,
-      cpfError: false,
-      academicError: false,
     };
   },
   validations: {
@@ -172,18 +158,18 @@ export default {
         .catch(function (error) {
           if (
             error.response.data ===
-            "Email já existente, tente o cadastro com um novo email."
-          ) {
-            alert("Email já existente, tente o cadastro com um novo email");
-            return;
-          }
-          if (
-            error.response.data ===
             "Registro acadêmico já existente, tente o cadastro com um novo registro."
           ) {
             alert(
               "Registro acadêmico já existente, tente o cadastro com um novo registro."
             );
+            return;
+          }
+          if (
+            error.response.data ===
+            "Email já existente, tente o cadastro com um novo email."
+          ) {
+            alert("Email já existente, tente o cadastro com um novo email");
             return;
           }
           if (

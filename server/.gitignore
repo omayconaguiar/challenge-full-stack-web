@@ -11,10 +11,10 @@ tmp
 database/development.sqlite
 
 # The yarn log
-yarn-error
+yarn.lock
 
-# The yarn file
-yarn
+# The yarn error
+yarn-error
 
 # The package-lock file
 package-lock

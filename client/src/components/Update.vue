@@ -107,7 +107,13 @@ export default {
           router.push("/users");
         })
         .catch(function (error) {
-          console.log(error);
+          if (
+            error.response.data ===
+            "Email já existente, tente o cadastro com um novo email."
+          ) {
+            alert("Email já existente, tente o cadastro com um novo email");
+            return;
+          }
         });
     },
   },

@@ -8,9 +8,10 @@ trait('Test/ApiClient')
 
 test('it should create registers with success', async ({ assert, client }) => {
   const sessionPayload = {
-    academic_id: '101235',
+    academic_id: '111111',
     name: 'Maycon',
-    cpf: '1631719788'
+    cpf: '83916513044',
+    email: 'mail@example.com'
   }
 
   const response = await client
@@ -45,9 +46,10 @@ test('it should get register search by name with success', async ({ assert, clie
 
 test('it should update register with success', async ({ assert, client }) => {
   const sessionPayload = {
-    academic_id: '101235',
+    academic_id: '101236',
     name: 'Joao',
-    cpf: '1631719788'
+    cpf: '74121774000',
+    email: 'mail2@example.com'
   }
 
   await client
@@ -56,9 +58,10 @@ test('it should update register with success', async ({ assert, client }) => {
     .end()
 
   const payload = {
-    academic_id: '101236',
-    name: 'Joao',
-    cpf: '16371619986',
+    academic_id: '111236',
+    name: 'Juca',
+    cpf: '76776232040',
+    email: 'mail3@example.com'
   }
 
   const id = await Database
@@ -78,9 +81,10 @@ test('it should update register with success', async ({ assert, client }) => {
 
 test('it should delete register by id with success', async ({ assert, client }) => {
   const sessionPayload = {
-    academic_id: '101235',
-    name: 'Joao',
-    cpf: '1631719788'
+    academic_id: '121235',
+    name: 'Mario',
+    cpf: '99084552067',
+    email: 'mail4@example.com'
   }
 
   await client

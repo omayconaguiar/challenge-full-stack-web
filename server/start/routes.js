@@ -2,7 +2,7 @@
 
 const Route = use("Route");
 
-Route.post("/api/users", "UserController.store");
+Route.post("/api/users", "UserController.store").middleware(["unique"]);;
 Route.get("/api/users", "UserController.index");
 Route.get("/api/users/:id", "UserController.show");
 Route.put("/api/users/:id", "UserController.update");
