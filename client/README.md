@@ -1,7 +1,7 @@
 # app
 
 <img
-    src="https://i.ibb.co/SX2zvGw/Captura-de-tela-2020-12-14-091917.jpg"
+    src="https://i.ibb.co/cy2GCF1/Captura-de-tela-2020-12-14-091917.jpg"
     alt="Design of that application"
     title="Design Page of that application" />
 
